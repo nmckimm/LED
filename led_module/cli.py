@@ -4,22 +4,38 @@
 
 from __future__ import print_function
 
-import argparse
 import sys
 from lights import LightTester
-from led_module import metadata
+import metadata
+import click
+click.disable_unicode_literals_warning = True
+from parse import parseFile
+import pprint
 
-
-def main(argv):
+@click.command()
+@click.option("--input", default=None, help="rawinput.txt")
+def main(input=None):
     """Program entry point.
 
     :param argv: command-line arguments
     :type argv: :class:`list`
     """
-
+    print("input", input)
+    
     lights = LightTester.lights
+    
+    N, instructions = parseFile(input)
+
+    lights = LightTester(N)
+
+    for instruction in instructions:
+        lights.apply(instruction)
+    
+    print('#occupied: ', lights.count()) 
+    return 0
 
 
+'''
     parser = argparse.ArgumentParser()
     parser.add_argument('input.txt')
     args = parser.parse_args()
@@ -27,17 +43,17 @@ def main(argv):
     # do stuff here
         for cmd in file:
             lights.apply(cmd)
-        print("#occupied: ", lights.count())
-
+        print("#occupied: ", lights.count())'''
+'''
     author_strings = []
     for name, email in zip(metadata.authors, metadata.emails):
         author_strings.append('Author: {0} <{1}>'.format(name, email))
 
     epilog = '''
-{project} {version}
+# {project} {version}
 
-{authors}
-URL: <{url}>
+# {authors}
+# URL: <{url}>
 '''.format(
         project=metadata.project,
         version=metadata.version,
@@ -60,7 +76,7 @@ URL: <{url}>
 
 
 
-    return 0
+    return 0'''
 
 '''def main(file, N):
     lights = LightTester(N)
@@ -76,7 +92,7 @@ URL: <{url}>
 
 def entry_point():
     """Zero-argument entry point for use with setuptools/distribute."""
-    raise SystemExit(main(sys.argv))
+    sys.exit(main())
 
 
 if __name__ == '__main__':
