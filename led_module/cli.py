@@ -11,6 +11,7 @@ import click
 click.disable_unicode_literals_warning = True
 from parse import parseFile
 import pprint
+pprint = pprint.pprint
 
 @click.command()
 @click.option("--input", default=None, help="rawinput.txt")
@@ -20,16 +21,26 @@ def main(input=None):
     :param argv: command-line arguments
     :type argv: :class:`list`
     """
-    print("input", input)
+
+            
+    print("input")
     
     lights = LightTester.lights
     
     N, instructions = parseFile(input)
-
+    print(instructions)
+    lels = [int(s) for s in instructions[0] if s.isdigit()]
+    print(lels)
+   
+    #Placeholder for instructions
+    
+            
     lights = LightTester(N)
+    
+    lights.apply(instructions)
 
-    for instruction in instructions:
-        lights.apply(instruction)
+    #for instruction in instructions:
+        #lights.apply(instruction)
     
     print('#occupied: ', lights.count()) 
     return 0
