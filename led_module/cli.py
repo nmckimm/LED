@@ -38,12 +38,12 @@ def main(input=None):
     lights = LightTester(N)
     
     lights.apply(instructions)
-
+    
     #for instruction in instructions:
         #lights.apply(instruction)
     
     print('#occupied: ', lights.count()) 
-    return 0
+    
 
 
 '''

@@ -10,9 +10,8 @@ class LightTester():
     
 
     def __init__(self, N):
-        x = int(math.sqrt(N))
-        y = int(math.sqrt(N))
-        self.lights = [[False]*x for _ in range(y)]
+
+        self.lights = [[False]*N for _ in range(N)]
         self.leds = np.array(self.lights)
         
     def apply(self, cmd):
@@ -20,19 +19,21 @@ class LightTester():
         counter = 0
         N, instructions = parseFile(input)
         
-        
+        lel = np.copy(self.leds)
         for i in range(len(instructions)):
+            print(values)
             onOff = [int(s) for s in instructions[i] if s.isdigit()]
+            print(onOff)
             x1, y1, x2, y2 = int(onOff[0]), int(onOff[1]), int(onOff[2]), int(onOff[3])
             print(x1, x2, y1, y2)
-            lel = np.copy(self.leds)
 
             lel[x1:x2,y1:y2] = True
-            return lel
-        
+            pprint(lel)
+            print(np.sum(lel))
+            
+        return np.sum(lel)
         #if cmd.search("switch"):
 
 
     def count(self):
-        count1 = pprint(sum(sum(self.lel, [])))
-        return count1
+        return 0
