@@ -5,35 +5,44 @@ import numpy as np
 import math
 from parse import parseFile
 
-class LightTester():
-    lights = None
+class LightTester:
+    lights = np.array([])
+    prac = np.array([])
     
 
     def __init__(self, N):
 
         self.lights = [[False]*N for _ in range(N)]
         self.leds = np.array(self.lights)
+        self.prac = np.copy(self.lights)
         
-    def apply(self, cmd):
-        cmd = re.compile(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*")
-        counter = 0
+    def apply(self, instructions):
         N, instructions = parseFile(input)
         
-        lel = np.copy(self.leds)
+        prac = np.copy(self.leds)
         for i in range(len(instructions)):
-            print(values)
-            onOff = [int(s) for s in instructions[i] if s.isdigit()]
-            print(onOff)
-            x1, y1, x2, y2 = int(onOff[0]), int(onOff[1]), int(onOff[2]), int(onOff[3])
-            print(x1, x2, y1, y2)
-
-            lel[x1:x2,y1:y2] = True
-            pprint(lel)
-            print(np.sum(lel))
+            print(instructions)
+            instruction = instructions[i] ## Tuple instruction changes for each loop (where i = line number in file)
+            command, x1, y1, x2, y2 = instruction ## Unpacking tuple and assigning each element
+            print(instruction)
+            x1, x2, y1, y2 = int(x1), int(x2), int(y1), int(y2)
+            print(command, x1, y1, x2, y2)
+            if (command == 'turn on'):
+                prac[x1:x2,y1:y2] = True
+                print(prac)
+                
+            elif (command == 'turn off'):
+                prac[x1:x2,y1:y2] = False
+                print(prac)
+            elif (command == 'switch'):
+                prac[x1:x2,y1:y2] = np.logical_not(prac[x1:x2,y1:y2]) #opposite values for t/f
+                print(prac)
+            else:
+                return 0
+        print(prac)        
+        print('#Occupied: ',np.sum(prac)) #prints number of True values (lights on)
             
-        return np.sum(lel)
         #if cmd.search("switch"):
 
 
-    def count(self):
-        return 0
+    

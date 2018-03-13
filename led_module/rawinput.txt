@@ -1,4 +1,4 @@
-100
+10
 switch 0,0 through 3,3
-switch 10,13 through 25,30
-turn off 4,4 thourgh 20,20
+turn on 0,0 through 4,4
+switch 5,5 through 8,8

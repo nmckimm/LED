@@ -16,6 +16,8 @@ pprint = pprint.pprint
 @click.command()
 @click.option("--input", default=None, help="rawinput.txt")
 def main(input=None):
+
+    
     """Program entry point.
 
     :param argv: command-line arguments
@@ -23,14 +25,12 @@ def main(input=None):
     """
 
             
-    print("input")
+    print("input",input)
     
     lights = LightTester.lights
     
     N, instructions = parseFile(input)
-    print(instructions)
-    lels = [int(s) for s in instructions[0] if s.isdigit()]
-    print(lels)
+
    
     #Placeholder for instructions
     
@@ -42,7 +42,6 @@ def main(input=None):
     #for instruction in instructions:
         #lights.apply(instruction)
     
-    print('#occupied: ', lights.count()) 
     
 
 
