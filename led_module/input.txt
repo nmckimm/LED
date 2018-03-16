@@ -1,2 +1,0 @@
-1000
-switch on 0,0 through 3,3

@@ -13,6 +13,7 @@ from main.main import main
 
 
 class TestMain(object):
+
     @parametrize('helparg', ['-h', '--help'])
     def test_help(self, helparg, capsys):
         with raises(SystemExit) as exc_info:
