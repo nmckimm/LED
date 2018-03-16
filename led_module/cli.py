@@ -26,22 +26,15 @@ def main(input=None):
 
             
     print("input",input)
-    
-    lights = LightTester.lights
-    
+        
     N, instructions = parseFile(input)
-
-   
-    #Placeholder for instructions
     
             
     lights = LightTester(N)
     
     lights.apply(instructions)
     
-    #for instruction in instructions:
-        #lights.apply(instruction)
-    
+
     
 
 
