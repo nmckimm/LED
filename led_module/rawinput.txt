@@ -1,4 +1,2 @@
-10
-switch 0,0 through 3,3
-turn on 0,0 through 4,4
-switch 5,5 through 8,8
+100
+turn on 1,1 through 2,2
